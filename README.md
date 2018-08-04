@@ -29,7 +29,7 @@ environment setup are executed, if necessary.
     - [`del-proj`](#del-proj)
     - [`ls-proj`](#ls-proj)
 
-## <span name="features"></span> Features
+## <a name="features"></a> Features
 
 - Name-path mapping to quick access directories across the filesystem.
 - Node.js version activation (requires `.nvmrc`):
@@ -43,24 +43,24 @@ environment setup are executed, if necessary.
 - Ruby environment activation:
     - Via [rvm](https://rvm.io/).
 
-### <span name="shims"></span> What about pyenv and rbenv?
+### <a name="shims"></a> What about pyenv and rbenv?
 Both [rbenv](https://github.com/rbenv/rbenv) and its python fork
 [pyenv](https://github.com/pyenv/pyenv) do not need activation in the current
 shell. This means that nothing needs to be done by this tool if you use them.
 
-## <span name="roadmap"></span> Roadmap
+## <a name="roadmap"></a> Roadmap
 
 - Project names autocompletion.
 - Build and installation.
 - Auto-recognition of current active project.
 
-## <span name="installation"></span> Installation
+## <a name="installation"></a> Installation
 
 The build file that I still have to make
 
 Why it is sourced should go here
 
-## <span name="usage"></span> Usage
+## <a name="usage"></a> Usage
 
 <a name="proj"></a>
 A project is *activated* via the `proj` command, that has the following syntax:
@@ -70,7 +70,7 @@ proj PROJECT-NAME
 The `proj` command `cd`s into the directory mapped to `PROJECT-NAME`, if any,
 and the proceeds to the activation of language-specific environment setup.
 
-<span name="add-proj"></span>
+<a name="add-proj"></a>
 The `add-proj` command adds/modifies a project to/in the mapping. It has the
 following syntax:
 ```bash
@@ -78,21 +78,21 @@ add-proj PROJECT-NAME BASE-DIR
 ```
 `BASE-DIR` can be an absolute path or relative to the current directory. The `add-proj` command also `cd`s in `BASE-DIR`
 
-<span name="new-proj"></span>
+<a name="new-proj"></a>
 The `new-proj` command is just a shorthand for `add-proj` that also create the
 project directory if it doesn't already exist. Its syntax is:
 ```bash
 new-proj PROJECT-NAME BASE-DIR
 ```
 
-<span name="del-proj"></span>
+<a name="del-proj"></a>
 The `del-proj` command is used to delete a project from the mapping. Its
 syntax is:
 ```bash
 del-proj PROJECT-NAME
 ```
 
-<span name="ls-proj"></span>
+<a name="ls-proj"></a>
 The `ls-proj` command displays the current mapping. It has the syntax:
 ```bash
 ls-proj
