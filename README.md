@@ -62,7 +62,7 @@ Why it is sourced should go here
 
 ## <span name="usage"></span> Usage
 
-<span name="proj"></span>
+<a name="proj"></a>
 A project is *activated* via the `proj` command, that has the following syntax:
 ```bash
 proj PROJECT-NAME
