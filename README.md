@@ -50,7 +50,7 @@ shell. This means that nothing needs to be done by this tool if you use them.
 
 ## <a name="roadmap"></a> Roadmap
 
-- Project names autocompletion.
+- ~~Project names autocompletion~~.
 - Build and installation.
 - Auto-recognition of current active project.
 
