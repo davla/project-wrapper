@@ -22,6 +22,7 @@ environment setup are executed, if necessary.
     - [`pyenv` and `rbenv`](#shims)
 - [Roadmap](#roadmap)
 - [Installation](#installation)
+    - [A few implementation details](#why-source)
 - [Usage](#usage)
     - [`add-proj`](#add-proj)
     - [`del-proj`](#del-proj)
@@ -51,17 +52,42 @@ shell. This means that nothing needs to be done by this tool if you use them.
 
 ## Roadmap
 
-- ~~Project names autocompletion~~.
-- Build and installation.
-- Auto-recognition of current active project.
-- File-system deletion.
-- Clear all entries.
+- ~~Project names autocompletion~~
+- ~~Build and installation~~
+- Auto-recognition of current active project
+- File-system deletion
+- Clear all entries
+- Static configuration
 
 ## Installation
 
-The build file that I still have to make
+The installation is `make`-based. The goals are the following:
+- `install` - to make the commands available for the current user.
+- `uninstall` - to remove all traces of the installed software from the system.
+- `test` - to install the commands in `$HOME/proj-test`, for testing purposes.
+- `untest` - to remove the testing environment.
 
-Why it is sourced should go here
+Therefore, the whole machinery is installed with the following command in the
+repository root directory:
+```bash
+make install
+```
+
+Two configuration parameters can be passed in the form of environment variables
+anytime. In order to make the configuration persistent, such variables should
+be permanently exported, for example in `$HOME/.bashrc`. The variables are:
+- `$PROJ_BASE` - The base directory where the files will be located. Defaults
+to `$HOME/.projects`.
+- `$PROJ_DB_FILE` - The file that stores the mapping. Defaults to `$PROJ_BASE/projects`.
+
+### <a name="why-source"></a> A few details
+
+The main functionality needs to change the current working directory.
+Furthermore, many language-specific environment setup also work on the current
+shell. As a result, the commands are not separate files, but shell functions,
+that need to be included in every new shell. These are the reasons why the
+main implementation file needs to be sourced in `$HOME/.bashrc`, or anywhere
+else executed when opening a new interactive shell.
 
 ## Usage
 
