@@ -23,15 +23,16 @@ environment setup are executed, if necessary.
 - [Roadmap](#roadmap)
 - [Installation](#installation)
 - [Usage](#usage)
-    - [`proj`](#proj)
     - [`add-proj`](#add-proj)
-    - [`new-proj`](#new-proj)
     - [`del-proj`](#del-proj)
     - [`ls-proj`](#ls-proj)
+    - [`new-proj`](#new-proj)
+    - [`proj`](#proj)
 
-## <a name="features"></a> Features
+## Features
 
 - Name-path mapping to quick access directories across the filesystem.
+- Autocompletion of project names when possible.
 - Node.js version activation (requires `.nvmrc`):
     - Via [nvm](https://github.com/creationix/nvm).
     - Via [n](https://github.com/tj/n).
@@ -48,27 +49,21 @@ Both [rbenv](https://github.com/rbenv/rbenv) and its python fork
 [pyenv](https://github.com/pyenv/pyenv) do not need activation in the current
 shell. This means that nothing needs to be done by this tool if you use them.
 
-## <a name="roadmap"></a> Roadmap
+## Roadmap
 
 - ~~Project names autocompletion~~.
 - Build and installation.
 - Auto-recognition of current active project.
+- File-system deletion.
+- Clear all entries.
 
-## <a name="installation"></a> Installation
+## Installation
 
 The build file that I still have to make
 
 Why it is sourced should go here
 
-## <a name="usage"></a> Usage
-
-<a name="proj"></a>
-A project is *activated* via the `proj` command, that has the following syntax:
-```bash
-proj PROJECT-NAME
-```
-The `proj` command `cd`s into the directory mapped to `PROJECT-NAME`, if any,
-and the proceeds to the activation of language-specific environment setup.
+## Usage
 
 <a name="add-proj"></a>
 The `add-proj` command adds/modifies a project to/in the mapping. It has the
@@ -76,18 +71,12 @@ following syntax:
 ```bash
 add-proj PROJECT-NAME BASE-DIR
 ```
-`BASE-DIR` can be an absolute path or relative to the current directory. The `add-proj` command also `cd`s in `BASE-DIR`
-
-<a name="new-proj"></a>
-The `new-proj` command is just a shorthand for `add-proj` that also create the
-project directory if it doesn't already exist. Its syntax is:
-```bash
-new-proj PROJECT-NAME BASE-DIR
-```
+`BASE-DIR` can be an absolute path or relative to the current directory. The
+`add-proj` command also `cd`s in `BASE-DIR`
 
 <a name="del-proj"></a>
-The `del-proj` command is used to delete a project from the mapping. Its
-syntax is:
+The `del-proj` command is used to delete a project from the mapping. It
+supports autocompletion of project names. Its syntax is:
 ```bash
 del-proj PROJECT-NAME
 ```
@@ -97,3 +86,19 @@ The `ls-proj` command displays the current mapping. It has the syntax:
 ```bash
 ls-proj
 ```
+
+<a name="new-proj"></a>
+The `new-proj` command is just a shorthand for `add-proj` that also create the
+project directory if it doesn't already exist. Its syntax is:
+```bash
+new-proj PROJECT-NAME BASE-DIR
+```
+
+<a name="proj"></a>
+A project is *activated* via the `proj` command, that has the following syntax:
+```bash
+proj PROJECT-NAME
+```
+The `proj` command `cd`s into the directory mapped to `PROJECT-NAME`, if any,
+and the proceeds to the activation of language-specific environment setup. It
+also supports autocompletion of project names.
