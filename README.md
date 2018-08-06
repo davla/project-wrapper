@@ -54,6 +54,7 @@ shell. This means that nothing needs to be done by this tool if you use them.
 
 - ~~Project names autocompletion~~
 - ~~Build and installation~~
+- Õnly edit bashrc if source is not there already
 - Import/export
 - Clear all entries
 - Static configuration
