@@ -54,10 +54,11 @@ shell. This means that nothing needs to be done by this tool if you use them.
 
 - ~~Project names autocompletion~~
 - ~~Build and installation~~
-- Auto-recognition of current active project
-- File-system deletion
+- Import/export
 - Clear all entries
 - Static configuration
+- File-system deletion
+- Auto-recognition of current active project
 
 ## Installation
 
