@@ -56,6 +56,7 @@ shell. This means that nothing needs to be done by this tool if you use them.
 - ~~Build and installation~~
 - Õnly edit bashrc if source is not there already
 - Import/export
+- Startup script
 - Clear all entries
 - Static configuration
 - File-system deletion
