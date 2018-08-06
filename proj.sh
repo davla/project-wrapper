@@ -141,9 +141,14 @@ function add-proj {
     local BASE
     BASE="$(readlink -f "$2")"
 
+    # If a parent directory in a path doesn't exist, readlink prints nothing
+    if [[ -z "$BASE" ]]; then
+        echo >&2 "A parent of project base directory $2 doesn't exist!"
+        return 2
+    fi
     if ! cd "$BASE" &> /dev/null; then
         echo >&2 "Project base directory $BASE doesn't exist!"
-        return 2
+        return 3
     fi
 
     local DB_ENTRY="$PROJECT\t$BASE"
@@ -177,8 +182,7 @@ alias ls-proj="cat $PROJ_DB_FILE"
 #   - $1: The project to be added/modified.
 #   - $2: The base directory of the project, either relative or absolute path.
 function new-proj {
-    local BASE
-    BASE="$(readlink -f "$2")"
+    local BASE="$2"
 
     # Creating base directory if it doesn't exist.
     mkdir -p "$BASE"
