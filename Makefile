@@ -38,7 +38,8 @@ PROJ_SCRIPT := proj.sh
 install: $(PROJ_SCRIPT)
 	source $< \
 		&& cp $< "$$PROJ_BASE" \
-		&& echo -e "\n# Proj\n[ -f $$PROJ_BASE/$< ] && source $$PROJ_BASE/$<" \
+		&& grep "$$PROJ_BASE" "$$HOME/.bashrc" &> /dev/null \
+		 	|| echo -e "\n# Proj\n[ -f $$PROJ_BASE/$< ] && source $$PROJ_BASE/$<" \
 			>> "$$HOME/.bashrc"
 
 # Removes the PROJ_BASE directory and the sourcing line in $HOME/.bashrc
