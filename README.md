@@ -59,6 +59,7 @@ shell. This means that nothing needs to be done by this tool if you use them.
 - Startup script
 - Clear all entries
 - Static configuration
+- Help message
 - File-system deletion
 - Auto-recognition of current active project
 
