@@ -54,7 +54,7 @@ shell. This means that nothing needs to be done by this tool if you use them.
 
 - ~~Project names autocompletion~~
 - ~~Build and installation~~
-- Õnly edit bashrc if source is not there already
+- Only edit bashrc if source is not there already
 - Import/export
 - Startup script
 - Clear all entries
@@ -95,8 +95,9 @@ else executed when opening a new interactive shell.
 ## Usage
 
 <a name="add-proj"></a>
-The `add-proj` command adds/modifies a project to/in the mapping. It has the
-following syntax:
+The `add-proj` command adds/modifies a project to/in the mapping. It supports
+autocompletion for both arguments, the first over project names and the
+second as directories. It has the following syntax:
 ```bash
 add-proj PROJECT-NAME BASE-DIR
 ```

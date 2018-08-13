@@ -93,17 +93,22 @@ function _activate-python {
         -exec dirname '{}' \; | head -n 1)/activate" 2> /dev/null
 }
 
-# This function implements autocompletion over project names, and it is meant
-# to be passed directly to the compare built-in via the -F option. Hence, the
-# arguments are the one passed by compare itself, even though only the second
-# one is used.
+# This function implements autocompletion over project names. No other words
+# are added after the first. It is meant to be passed directly to the complete
+# built-in via the -F option. Hence, the arguments are the one passed by
+# complete itself.
 #
 # Arguments:
 #   - $1: The name of the command whose arguments are being completed.
 #   - $2: The word being completed.
 #   - $3: The word preceding the word being completed.
 function _proj-complete {
+    local CMD="$1"
     local CURR_WORD="$2"
+    local PREV_WORD="$3"
+
+    # Not first word being completed, no need to add anything
+    [[ "$PREV_WORD" != "$CMD" ]] && return 0
 
     # List of all project names
     local PROJECTS
@@ -111,6 +116,32 @@ function _proj-complete {
 
     # using compgen to filter the project based on the current word
     mapfile -t COMPREPLY < <(compgen -W "${PROJECTS[*]}" "$CURR_WORD")
+}
+
+# This function implements autocompletion over project names if it is the first
+# word being completed, and over directories if it is the second one. No words
+# will be added after the second. It is meant to be passed directly to the
+# complete built-in via the -F option. Hence, the arguments are the one passed
+# by complete itself.
+#
+# Arguments:
+#   - $1: The name of the command whose arguments are being completed.
+#   - $2: The word being completed.
+#   - $3: The word preceding the word being completed.
+function _add-complete {
+    local CMD="$1"
+    local CURR_WORD="$2"
+    local PREV_WORD="$3"
+
+    # The previous word is the command, this is the first completed word.
+    if [[ "$PREV_WORD" == "$CMD" ]]; then
+        _proj-complete "$@"
+
+    # The previous word is neither the command nor a directory, completing
+    # over directory names.
+    elif [[ ! -d "$PREV_WORD" ]]; then
+        mapfile -t COMPREPLY < <(compgen -d "$CURR_WORD")
+    fi
 }
 
 # This function searches a project in the database file, returning the whole
@@ -155,7 +186,7 @@ function add-proj {
 
     # Editing with sed if the project exists, else appending the new entry.
     _search-project "$PROJECT" &> /dev/null \
-        && sed -i "s|^$PROJECT.+$|$DB_ENTRY|" "$PROJ_DB_FILE" \
+        && sed -Ei "s|^$PROJECT.+$|$DB_ENTRY|" "$PROJ_DB_FILE" \
         || echo -e "$DB_ENTRY" >> "$PROJ_DB_FILE"
 }
 
@@ -234,5 +265,8 @@ function proj {
 mkdir -p "$PROJ_BASE"
 touch "$PROJ_DB_FILE"
 
-# Autocompletion for the two commands needing to use an existing project.
-complete -F _proj-complete proj del-proj
+# Setting autocompletion on project names only.
+complete -F _proj-complete del-proj proj
+
+# Setting autocompletion for project names first and then directories.
+complete -F _add-complete add-proj
