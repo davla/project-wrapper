@@ -198,7 +198,7 @@ function del-proj {
     local PROJECT="$1"
 
     # If the project does nto exist, it is simply not deleted.
-    sed -i "/^$PROJECT/d" "$PROJ_DB_FILE"
+    sed -i -E "/^$PROJECT\s/d" "$PROJ_DB_FILE"
 }
 
 # This alias displays the current mapping. Given the database file format,
