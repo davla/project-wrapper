@@ -1,5 +1,7 @@
 # project-wrapper
 
+:skull::skull::skull: ***This repository is archived :sob: I'm not maintaining it anymore, as I switched to [zsh](https://www.zsh.org) and [wd](https://github.com/mfaerevaag/wd)*** :skull::skull::skull:
+
 A simple bash-CLI utility to easy access and setup projects around the
 filesystem.
 
